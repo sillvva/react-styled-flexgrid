@@ -1,0 +1,25 @@
+{
+  "name": "@sillvva/react-styled-flexgrid",
+  "version": "1.0.0",
+  "description": "A Package for CSS Grid and Flexbox React Components",
+  "devDependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.5.2",
+    "styled-components": "^4.3.2"
+  },
+  "main": "index.js",
+  "module": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sillvva/react-styled-flexgrid.git"
+  },
+  "author": "Matt DeKok",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sillvva/react-styled-flexgrid/issues"
+  },
+  "homepage": "https://github.com/sillvva/react-styled-flexgrid#readme"
+}
