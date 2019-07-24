@@ -43,6 +43,8 @@ export namespace ReactGridComponent {
         rowEnd?: number;
         align?: AlignItems;
         justify?: JustifyItems;
+        width?: GridWidth;
+        height?: GridWidth;
     }
 }
 
