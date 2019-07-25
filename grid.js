@@ -64,22 +64,21 @@ export const GridContainer = styled.div`
     ${({ width }) => breakpointWrapper('width', px(width))}
     ${({ height }) => breakpointWrapper('height', px(height))}
 `;
+const ptGridWidth = PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]);
 const ptColumns = PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
-    PropTypes.arrayOf(PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])),
+    PropTypes.arrayOf(ptGridWidth),
     PropTypes.shape({
-        min: PropTypes.oneOfType([ PropTypes.string, PropTypes.number ])
+        min: ptGridWidth
     })
 ]);
 const ptRows = PropTypes.oneOfType([ 
     PropTypes.string, 
     PropTypes.number, 
-    PropTypes.arrayOf(PropTypes.oneOfType([ 
-        PropTypes.string, PropTypes.number 
-    ])) 
+    PropTypes.arrayOf(ptGridWidth) 
 ]);
-const ptGridWidth = PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]);
+const ptAreas = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string));
 const ptFlow = PropTypes.oneOf([ "row", "column", "dense", "row dense", "column dense" ]);
 const ptAlign = PropTypes.oneOf([ "center", "start", "end", "stretch", "space-around", "space-between", "space-evenly", "inherit", "initial", "unset" ]);
 const ptAlignItems = PropTypes.oneOf([ "center", "start", "end", "stretch", "inherit", "initial", "unset" ]);
@@ -126,13 +125,13 @@ GridContainer.propTypes = {
         })
     ]),
     areas: PropTypes.oneOfType([
-        PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+        ptAreas,
         PropTypes.shape({
-            xs: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-            sm: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-            md: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-            lg: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-            xl: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string))
+            xs: ptAreas,
+            sm: ptAreas,
+            md: ptAreas,
+            lg: ptAreas,
+            xl: ptAreas
         })
     ]),
     flow: PropTypes.oneOfType([
