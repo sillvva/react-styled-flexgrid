@@ -47,23 +47,6 @@ const areaBuilder = (areas) => {
     }
     return null;
 };
-export const GridContainer = styled.div`
-    display: grid;
-    ${({ flow }) => breakpointWrapper("grid-auto-flow", flow)}
-    ${({ columns }) => breakpointWrapper('grid-template-columns', columns, columnBuilder)}
-    ${({ rows }) => breakpointWrapper('grid-template-rows', rows, rowBuilder)}
-    ${({ minRowHeight }) => breakpointWrapper('grid-auto-rows', px(minRowHeight))}
-    ${({ areas }) => breakpointWrapper('grid-template-areas', areas, areaBuilder)}
-    ${({ gap }) => breakpointWrapper("grid-gap", px(gap))}
-    ${({ colGap }) => breakpointWrapper("column-gap", px(colGap))}
-    ${({ rowGap }) => breakpointWrapper("row-gap", px(rowGap))}
-    ${({ align }) => breakpointWrapper("align-content", align)}
-    ${({ justify }) => breakpointWrapper("justify-content", justify)}
-    ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
-    ${({ justifyItems }) => breakpointWrapper("justify-items", justifyItems)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height))}
-`;
 const ptGridWidth = PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]);
 const ptColumns = PropTypes.oneOfType([
     PropTypes.string,
@@ -82,9 +65,9 @@ const ptAreas = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string));
 const ptFlow = PropTypes.oneOf([ "row", "column", "dense", "row dense", "column dense" ]);
 const ptAlign = PropTypes.oneOf([ "center", "start", "end", "stretch", "space-around", "space-between", "space-evenly", "inherit", "initial", "unset" ]);
 const ptAlignItems = PropTypes.oneOf([ "center", "start", "end", "stretch", "inherit", "initial", "unset" ]);
-const ptJustifyItems = PropTypes.oneOf([ "center", "start", "end", "left", "right", "stretch", "inherit", "initial", "unset" ]);
-GridContainer.propTypes = {
-    className: PropTypes.oneOfType([
+const ptJustifyItems = PropTypes.oneOf([ "center", "start", "end", "stretch", "inherit", "initial", "unset" ]);
+const gridItemPropTypes = {
+    area: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({
             xs: PropTypes.string,
@@ -92,6 +75,129 @@ GridContainer.propTypes = {
             md: PropTypes.string,
             lg: PropTypes.string,
             xl: PropTypes.string
+        })
+    ]),
+    column: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            xs: PropTypes.string,
+            sm: PropTypes.string,
+            md: PropTypes.string,
+            lg: PropTypes.string,
+            xl: PropTypes.string
+        })
+    ]),
+    columnStart: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.shape({
+            xs: PropTypes.number,
+            sm: PropTypes.number,
+            md: PropTypes.number,
+            lg: PropTypes.number,
+            xl: PropTypes.number
+        })
+    ]),
+    columnEnd: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.shape({
+            xs: PropTypes.number,
+            sm: PropTypes.number,
+            md: PropTypes.number,
+            lg: PropTypes.number,
+            xl: PropTypes.number
+        })
+    ]),
+    row: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.shape({
+            xs: PropTypes.string,
+            sm: PropTypes.string,
+            md: PropTypes.string,
+            lg: PropTypes.string,
+            xl: PropTypes.string
+        })
+    ]),
+    rowStart: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.shape({
+            xs: PropTypes.number,
+            sm: PropTypes.number,
+            md: PropTypes.number,
+            lg: PropTypes.number,
+            xl: PropTypes.number
+        })
+    ]),
+    rowEnd: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.shape({
+            xs: PropTypes.number,
+            sm: PropTypes.number,
+            md: PropTypes.number,
+            lg: PropTypes.number,
+            xl: PropTypes.number
+        })
+    ]),
+    align: PropTypes.oneOfType([
+        ptAlignItems,
+        PropTypes.shape({
+            xs: ptAlignItems,
+            sm: ptAlignItems,
+            md: ptAlignItems,
+            lg: ptAlignItems,
+            xl: ptAlignItems
+        })
+    ]),
+    justify: PropTypes.oneOfType([
+        ptJustifyItems,
+        PropTypes.shape({
+            xs: ptJustifyItems,
+            sm: ptJustifyItems,
+            md: ptJustifyItems,
+            lg: ptJustifyItems,
+            xl: ptJustifyItems
+        })
+    ]),
+    width: PropTypes.oneOfType([
+        ptGridWidth,
+        PropTypes.shape({
+            xs: ptGridWidth,
+            sm: ptGridWidth,
+            md: ptGridWidth,
+            lg: ptGridWidth,
+            xl: ptGridWidth
+        })
+    ]),
+    height: PropTypes.oneOfType([
+        ptGridWidth,
+        PropTypes.shape({
+            xs: ptGridWidth,
+            sm: ptGridWidth,
+            md: ptGridWidth,
+            lg: ptGridWidth,
+            xl: ptGridWidth
+        })
+    ]),
+    show: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+            xs: PropTypes.bool,
+            sm: PropTypes.bool,
+            md: PropTypes.bool,
+            lg: PropTypes.bool,
+            xl: PropTypes.bool
+        })
+    ]),
+    itemProps: PropTypes.object
+};
+const gridPropTypes = {
+    inline: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+            xs: PropTypes.bool,
+            sm: PropTypes.bool,
+            md: PropTypes.bool,
+            lg: PropTypes.bool,
+            xl: PropTypes.bool
         })
     ]),
     columns: PropTypes.oneOfType([
@@ -114,7 +220,17 @@ GridContainer.propTypes = {
             xl: ptRows
         })
     ]),
-    minRowHeight: PropTypes.oneOfType([
+    autoColWidth: PropTypes.oneOfType([
+        ptGridWidth,
+        PropTypes.shape({
+            xs: ptGridWidth,
+            sm: ptGridWidth,
+            md: ptGridWidth,
+            lg: ptGridWidth,
+            xl: ptGridWidth
+        })
+    ]),
+    autoRowHeight: PropTypes.oneOfType([
         ptGridWidth,
         PropTypes.shape({
             xs: ptGridWidth,
@@ -233,10 +349,41 @@ GridContainer.propTypes = {
             lg: ptGridWidth,
             xl: ptGridWidth
         })
-    ])
+    ]),
+    show: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+            xs: PropTypes.bool,
+            sm: PropTypes.bool,
+            md: PropTypes.bool,
+            lg: PropTypes.bool,
+            xl: PropTypes.bool
+        })
+    ]),
+    itemProps: PropTypes.object
 };
+export const GridContainer = styled.div`
+    ${({ inline }) => breakpointWrapper('display', inline ? 'inline-grid' : 'grid')}
+    ${({ flow }) => breakpointWrapper("grid-auto-flow", flow)}
+    ${({ columns }) => breakpointWrapper('grid-template-columns', columns, columnBuilder)}
+    ${({ rows }) => breakpointWrapper('grid-template-rows', rows, rowBuilder)}
+    ${({ autoColWidth }) => breakpointWrapper('grid-auto-columns', px(autoColWidth))}
+    ${({ autoRowHeight }) => breakpointWrapper('grid-auto-rows', px(autoRowHeight))}
+    ${({ areas }) => breakpointWrapper('grid-template-areas', areas, areaBuilder)}
+    ${({ gap }) => breakpointWrapper("grid-gap", px(gap))}
+    ${({ colGap }) => breakpointWrapper("column-gap", px(colGap))}
+    ${({ rowGap }) => breakpointWrapper("row-gap", px(rowGap))}
+    ${({ align }) => breakpointWrapper("align-content", align)}
+    ${({ justify }) => breakpointWrapper("justify-content", justify)}
+    ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
+    ${({ justifyItems }) => breakpointWrapper("justify-items", justifyItems)}
+    ${({ width }) => breakpointWrapper('width', px(width))}
+    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ show, inline }) => breakpointWrapper('display', show != null && (show ? inline ? 'inline-grid' : 'grid' : 'none'))}
+`;
+GridContainer.propTypes = gridPropTypes;
 export const GridRow = props => <React.Fragment>{props.children}</React.Fragment>;
-export const GridItem = styled.div`
+export const GridItemContainer = styled.div`
     ${({ area }) => breakpointWrapper("grid-area", area)} 
     ${({ column }) => breakpointWrapper("grid-column", column)} 
     ${({ columnStart }) => breakpointWrapper("grid-column-start", Math.abs(columnStart))} 
@@ -247,121 +394,21 @@ export const GridItem = styled.div`
     ${({ align }) => breakpointWrapper("align-self", align)}
     ${({ justify }) => breakpointWrapper("justify-self", justify)}
     ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height))}
+    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ show }) => breakpointWrapper('display', show != null && (show ? 'block' : 'none'))}
 `;
-GridItem.propTypes = {
-    area: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.shape({
-            xs: PropTypes.string,
-            sm: PropTypes.string,
-            md: PropTypes.string,
-            lg: PropTypes.string,
-            xl: PropTypes.string
-        })
-    ]),
-    column: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.shape({
-            xs: PropTypes.string,
-            sm: PropTypes.string,
-            md: PropTypes.string,
-            lg: PropTypes.string,
-            xl: PropTypes.string
-        })
-    ]),
-    columnStart: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.shape({
-            xs: PropTypes.number,
-            sm: PropTypes.number,
-            md: PropTypes.number,
-            lg: PropTypes.number,
-            xl: PropTypes.number
-        })
-    ]),
-    columnEnd: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.shape({
-            xs: PropTypes.number,
-            sm: PropTypes.number,
-            md: PropTypes.number,
-            lg: PropTypes.number,
-            xl: PropTypes.number
-        })
-    ]),
-    row: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.shape({
-            xs: PropTypes.string,
-            sm: PropTypes.string,
-            md: PropTypes.string,
-            lg: PropTypes.string,
-            xl: PropTypes.string
-        })
-    ]),
-    rowStart: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.shape({
-            xs: PropTypes.number,
-            sm: PropTypes.number,
-            md: PropTypes.number,
-            lg: PropTypes.number,
-            xl: PropTypes.number
-        })
-    ]),
-    rowEnd: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.shape({
-            xs: PropTypes.number,
-            sm: PropTypes.number,
-            md: PropTypes.number,
-            lg: PropTypes.number,
-            xl: PropTypes.number
-        })
-    ]),
-    align: PropTypes.oneOfType([
-        ptAlignItems,
-        PropTypes.shape({
-            xs: ptAlignItems,
-            sm: ptAlignItems,
-            md: ptAlignItems,
-            lg: ptAlignItems,
-            xl: ptAlignItems
-        })
-    ]),
-    justify: PropTypes.oneOfType([
-        ptJustifyItems,
-        PropTypes.shape({
-            xs: ptJustifyItems,
-            sm: ptJustifyItems,
-            md: ptJustifyItems,
-            lg: ptJustifyItems,
-            xl: ptJustifyItems
-        })
-    ]),
-    width: PropTypes.oneOfType([
-        ptGridWidth,
-        PropTypes.shape({
-            xs: ptGridWidth,
-            sm: ptGridWidth,
-            md: ptGridWidth,
-            lg: ptGridWidth,
-            xl: ptGridWidth
-        })
-    ]),
-    height: PropTypes.oneOfType([
-        ptGridWidth,
-        PropTypes.shape({
-            xs: ptGridWidth,
-            sm: ptGridWidth,
-            md: ptGridWidth,
-            lg: ptGridWidth,
-            xl: ptGridWidth
-        })
-    ])
-};
-
+GridItemContainer.propTypes = gridItemPropTypes;
+class GridItem extends React.Component {
+    render() {
+        return (
+            <GridItemContainer {...this.props}>
+                {React.Children.map(this.props.children, child => {
+                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
+                })}
+            </GridItemContainer>
+        );
+    }
+}
 export class Grid extends React.Component {
     static get Row() {
         return GridRow;
@@ -370,6 +417,12 @@ export class Grid extends React.Component {
         return GridItem;
     }
     render() {
-        return <GridContainer {...this.props}>{this.props.children}</GridContainer>;
+        return (
+            <GridContainer {...this.props}>
+                {React.Children.map(this.props.children, child => {
+                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
+                })}
+            </GridContainer>
+        );
     }
 }

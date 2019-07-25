@@ -2,97 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { breakpointWrapper, px } from "./common";
-export const FlexContainer = styled.div`
-    display: flex;
-    ${({ dir }) => breakpointWrapper('flex-dir', dir)}
-    ${({ wrap }) => breakpointWrapper('flex-wrap', wrap)}
-    ${({ align }) => breakpointWrapper('align-content', align)}
-    ${({ justify }) => breakpointWrapper('justify-content', justify)}
-    ${({ alignItems }) => breakpointWrapper('align-items', alignItems)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height))}
-`;
-const ptFlexDir = PropTypes.oneOf(["row", "row-reverse", "column", "column-reverse"]);
-const ptFlexWrap = PropTypes.oneOf(["nowrap", "wrap", "wrap-reverse"]);
-const ptAlign = PropTypes.oneOf(["stretch", "flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "inherit", "initial", "unset"]);
-const ptJustify = PropTypes.oneOf(["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "inherit", "initial", "unset"]);
-const ptAlignItems = PropTypes.oneOf(["stretch", "flex-start", "flex-end", "center", "baseline", "inherit", "initial", "unset"]);
-const ptFlexWidth = PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-]);
-FlexContainer.propTypes = {
-    dir: PropTypes.oneOfType([
-        ptFlexDir,
-        PropTypes.shape({
-            xs: ptFlexDir,
-            sm: ptFlexDir,
-            md: ptFlexDir,
-            lg: ptFlexDir,
-            xl: ptFlexDir
-        })
-    ]),
-    wrap: PropTypes.oneOfType([
-        ptFlexWrap,
-        PropTypes.shape({
-            xs: ptFlexWrap,
-            sm: ptFlexWrap,
-            md: ptFlexWrap,
-            lg: ptFlexWrap,
-            xl: ptFlexWrap
-        })
-    ]),
-    align: PropTypes.oneOfType([
-        ptAlign,
-        PropTypes.shape({
-            xs: ptAlign,
-            sm: ptAlign,
-            md: ptAlign,
-            lg: ptAlign,
-            xl: ptAlign
-        })
-    ]),
-    justify: PropTypes.oneOfType([
-        ptJustify,
-        PropTypes.shape({
-            xs: ptJustify,
-            sm: ptJustify,
-            md: ptJustify,
-            lg: ptJustify,
-            xl: ptJustify
-        })
-    ]),
-    alignItems: PropTypes.oneOfType([
-        ptAlignItems,
-        PropTypes.shape({
-            xs: ptAlignItems,
-            sm: ptAlignItems,
-            md: ptAlignItems,
-            lg: ptAlignItems,
-            xl: ptAlignItems
-        })
-    ]),
-    width: PropTypes.oneOfType([
-        ptFlexWidth,
-        PropTypes.shape({
-            xs: ptFlexWidth,
-            sm: ptFlexWidth,
-            md: ptFlexWidth,
-            lg: ptFlexWidth,
-            xl: ptFlexWidth
-        })
-    ]),
-    height: PropTypes.oneOfType([
-        ptFlexWidth,
-        PropTypes.shape({
-            xs: ptFlexWidth,
-            sm: ptFlexWidth,
-            md: ptFlexWidth,
-            lg: ptFlexWidth,
-            xl: ptFlexWidth
-        })
-    ])
-};
 const flexBuilder = (flex) => {
     if (flex) {
         if (typeof flex === 'string' || typeof flex === 'number') {
@@ -112,16 +21,15 @@ const flexBuilder = (flex) => {
     }
     return null;
 }
-export const FlexItem = styled.div`
-    ${({ order }) => breakpointWrapper('order', order)}
-    ${({ flex }) => breakpointWrapper('flex', flex, flexBuilder)}
-    ${({ grow }) => breakpointWrapper('flex-grow', grow)}
-    ${({ shrink }) => breakpointWrapper('flex-shrink', shrink)}
-    ${({ basis }) => breakpointWrapper('flex-basis', px(basis))}
-    ${({ align }) => breakpointWrapper('align-self', align)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height))}
-`;
+const ptFlexDir = PropTypes.oneOf(["row", "row-reverse", "column", "column-reverse"]);
+const ptFlexWrap = PropTypes.oneOf(["nowrap", "wrap", "wrap-reverse"]);
+const ptAlign = PropTypes.oneOf(["stretch", "flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "inherit", "initial", "unset"]);
+const ptJustify = PropTypes.oneOf(["flex-start", "flex-end", "center", "space-between", "space-around", "space-evenly", "inherit", "initial", "unset"]);
+const ptAlignItems = PropTypes.oneOf(["stretch", "flex-start", "flex-end", "center", "baseline", "inherit", "initial", "unset"]);
+const ptFlexWidth = PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string
+]);
 const ptFIFlex = PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -146,7 +54,7 @@ const ptFIFlex = PropTypes.oneOfType([
         ]).isRequired
     })
 ]);
-FlexItem.propTypes = {
+const flexItemPropTypes = {
     order: PropTypes.oneOfType([
         PropTypes.number,
         PropTypes.shape({
@@ -226,13 +134,158 @@ FlexItem.propTypes = {
             lg: ptFlexWidth,
             xl: ptFlexWidth
         })
-    ])
+    ]),
+    show: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+            xs: PropTypes.bool,
+            sm: PropTypes.bool,
+            md: PropTypes.bool,
+            lg: PropTypes.bool,
+            xl: PropTypes.bool
+        })
+    ]),
+    itemProps: PropTypes.object
 };
+const flexPropTypes = {
+    inline: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+            xs: PropTypes.bool,
+            sm: PropTypes.bool,
+            md: PropTypes.bool,
+            lg: PropTypes.bool,
+            xl: PropTypes.bool
+        })
+    ]),
+    dir: PropTypes.oneOfType([
+        ptFlexDir,
+        PropTypes.shape({
+            xs: ptFlexDir,
+            sm: ptFlexDir,
+            md: ptFlexDir,
+            lg: ptFlexDir,
+            xl: ptFlexDir
+        })
+    ]),
+    wrap: PropTypes.oneOfType([
+        ptFlexWrap,
+        PropTypes.shape({
+            xs: ptFlexWrap,
+            sm: ptFlexWrap,
+            md: ptFlexWrap,
+            lg: ptFlexWrap,
+            xl: ptFlexWrap
+        })
+    ]),
+    align: PropTypes.oneOfType([
+        ptAlign,
+        PropTypes.shape({
+            xs: ptAlign,
+            sm: ptAlign,
+            md: ptAlign,
+            lg: ptAlign,
+            xl: ptAlign
+        })
+    ]),
+    justify: PropTypes.oneOfType([
+        ptJustify,
+        PropTypes.shape({
+            xs: ptJustify,
+            sm: ptJustify,
+            md: ptJustify,
+            lg: ptJustify,
+            xl: ptJustify
+        })
+    ]),
+    alignItems: PropTypes.oneOfType([
+        ptAlignItems,
+        PropTypes.shape({
+            xs: ptAlignItems,
+            sm: ptAlignItems,
+            md: ptAlignItems,
+            lg: ptAlignItems,
+            xl: ptAlignItems
+        })
+    ]),
+    width: PropTypes.oneOfType([
+        ptFlexWidth,
+        PropTypes.shape({
+            xs: ptFlexWidth,
+            sm: ptFlexWidth,
+            md: ptFlexWidth,
+            lg: ptFlexWidth,
+            xl: ptFlexWidth
+        })
+    ]),
+    height: PropTypes.oneOfType([
+        ptFlexWidth,
+        PropTypes.shape({
+            xs: ptFlexWidth,
+            sm: ptFlexWidth,
+            md: ptFlexWidth,
+            lg: ptFlexWidth,
+            xl: ptFlexWidth
+        })
+    ]),
+    show: PropTypes.oneOfType([
+        PropTypes.bool,
+        PropTypes.shape({
+            xs: PropTypes.bool,
+            sm: PropTypes.bool,
+            md: PropTypes.bool,
+            lg: PropTypes.bool,
+            xl: PropTypes.bool
+        })
+    ]),
+    itemProps: PropTypes.object
+};
+const FlexContainer = styled.div`
+    ${({ inline }) => breakpointWrapper('display', inline ? 'inline-flex' : 'flex')}
+    ${({ dir }) => breakpointWrapper('flex-dir', dir)}
+    ${({ wrap }) => breakpointWrapper('flex-wrap', wrap)}
+    ${({ align }) => breakpointWrapper('align-content', align)}
+    ${({ justify }) => breakpointWrapper('justify-content', justify)}
+    ${({ alignItems }) => breakpointWrapper('align-items', alignItems)}
+    ${({ width }) => breakpointWrapper('width', px(width))}
+    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ show, inline }) => breakpointWrapper('display', show != null && (show ? inline ? 'inline-flex' : 'flex' : 'none'))}
+`;
+FlexContainer.propTypes = flexPropTypes;
+const FlexItemContainer = styled.div`
+    ${({ order }) => breakpointWrapper('order', order)}
+    ${({ flex }) => breakpointWrapper('flex', flex, flexBuilder)}
+    ${({ grow }) => breakpointWrapper('flex-grow', grow)}
+    ${({ shrink }) => breakpointWrapper('flex-shrink', shrink)}
+    ${({ basis }) => breakpointWrapper('flex-basis', px(basis))}
+    ${({ align }) => breakpointWrapper('align-self', align)}
+    ${({ width }) => breakpointWrapper('width', px(width))}
+    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ show }) => breakpointWrapper('display', show != null && (show ? 'block' : 'none'))}
+`;
+FlexItemContainer.propTypes = flexItemPropTypes;
+class FlexItem extends React.Component {
+    render() {
+        return (
+            <FlexItemContainer {...this.props}>
+                {React.Children.map(this.props.children, child => {
+                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
+                })}
+            </FlexItemContainer>
+        );
+    }
+}
 export class Flex extends React.Component {
     static get Item() {
         return FlexItem;
     }
     render() {
-        return <FlexContainer {...this.props}>{this.props.children}</FlexContainer>;
+        return (
+            <FlexContainer {...this.props}>
+                {React.Children.map(this.props.children, child => {
+                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
+                })}
+            </FlexContainer>
+        );
     }
 }

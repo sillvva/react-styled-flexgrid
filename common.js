@@ -5,7 +5,20 @@ export const breakpoints = {
     xl: "1199px"
 };
 
-export const px = n => (typeof n === "number" ? n + "px" : n && n.length > 0 ? n : null);
+export const px = value => {
+    if (value) {
+        if (value.xs || value.sm || value.md || value.lg || value.xl) {
+            const output = { ...value };
+            if (output.xs) output.xs = px(output.xs);
+            if (output.sm) output.sm = px(output.sm);
+            if (output.md) output.md = px(output.md);
+            if (output.lg) output.lg = px(output.lg);
+            if (output.xl) output.xl = px(output.xl);
+            return output;
+        }
+        return typeof value === "number" ? value + "px" : value && value.length > 0 ? value : null;
+    }
+};
 
 export const fr = n => (typeof n === "number" ? `repeat(${n}, 1fr)` : n);
 
