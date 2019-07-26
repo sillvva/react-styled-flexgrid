@@ -378,7 +378,8 @@ export const GridContainer = styled.div`
     ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
     ${({ justifyItems }) => breakpointWrapper("justify-items", justifyItems)}
     ${({ width }) => breakpointWrapper('width', width, px)}
-    ${({ height }) => breakpointWrapper('height', height, px) + breakpointWrapper('line-height', height, px)}
+    ${({ height }) => breakpointWrapper('height', height, px)}
+    ${({ height }) => breakpointWrapper('line-height', height, px)}
     ${({ show, inline }) => breakpointWrapper('display', show != null && (show ? inline ? 'inline-grid' : 'grid' : 'none'))}
 `;
 GridContainer.propTypes = gridPropTypes;
@@ -386,15 +387,16 @@ export const GridRow = props => <React.Fragment>{props.children}</React.Fragment
 export const GridItemContainer = styled.div`
     ${({ area }) => breakpointWrapper("grid-area", area)} 
     ${({ column }) => breakpointWrapper("grid-column", column)} 
-    ${({ columnStart }) => breakpointWrapper("grid-column-start", Math.abs(columnStart))} 
-    ${({ columnEnd }) => breakpointWrapper("grid-column-end", Math.abs(columnEnd))} 
+    ${({ columnStart }) => breakpointWrapper("grid-column-start", columnStart, Math.abs)} 
+    ${({ columnEnd }) => breakpointWrapper("grid-column-end", columnEnd, Math.abs)} 
     ${({ row }) => breakpointWrapper("grid-row", row)} 
-    ${({ rowStart }) => breakpointWrapper("grid-row-start", Math.abs(rowStart))} 
-    ${({ rowEnd }) => breakpointWrapper("grid-row-end", Math.abs(rowEnd))}
+    ${({ rowStart }) => breakpointWrapper("grid-row-start", rowStart, Math.abs)} 
+    ${({ rowEnd }) => breakpointWrapper("grid-row-end", rowEnd, Math.abs)}
     ${({ align }) => breakpointWrapper("align-self", align)}
     ${({ justify }) => breakpointWrapper("justify-self", justify)}
     ${({ width }) => breakpointWrapper('width', width, px)}
-    ${({ height }) => breakpointWrapper('height', height, px) + breakpointWrapper('line-height', height, px)}
+    ${({ height }) => breakpointWrapper('height', height, px)}
+    ${({ height }) => breakpointWrapper('line-height', height, px)}
     ${({ show }) => breakpointWrapper('display', show != null && (show ? 'block' : 'none'))}
 `;
 GridItemContainer.propTypes = gridItemPropTypes;
