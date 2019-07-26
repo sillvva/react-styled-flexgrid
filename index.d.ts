@@ -32,6 +32,7 @@ export namespace ReactGridComponent {
 
     interface GridProps {
         children?: React.ReactNode;
+        inline?: boolean | { xs?: boolean, sm?: boolean, md?: boolean, lg?: boolean, xl?: boolean };
         columns?: Columns | { xs?: Columns, sm?: Columns, md?: Columns, lg?: Columns, xl?: Columns };
         rows?: Rows | { xs?: Rows, sm?: Rows, md?: Rows, lg?: Rows, xl?: Rows };
         autoColWidth?: GridWidth | { xs?: GridWidth, sm?: GridWidth, md?: GridWidth, lg?: GridWidth, xl?: GridWidth };
@@ -85,6 +86,7 @@ export namespace ReactFlexComponent {
 
     interface FlexProps {
         children?: React.ReactNode;
+        inline?: boolean | { xs?: boolean, sm?: boolean, md?: boolean, lg?: boolean, xl?: boolean };
         dir?: FlexDirection | { xs?: FlexDirection, sm?: FlexDirection, md?: FlexDirection, lg?: FlexDirection, xl?: FlexDirection };
         wrap?: FlexWrap | { xs?: FlexWrap, sm?: FlexWrap, md?: FlexWrap, lg?: FlexWrap, xl?: FlexWrap };
         alignItems?: AlignItems | { xs?: AlignItems, sm?: AlignItems, md?: AlignItems, lg?: AlignItems, xl?: AlignItems };
