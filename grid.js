@@ -367,18 +367,18 @@ export const GridContainer = styled.div`
     ${({ flow }) => breakpointWrapper("grid-auto-flow", flow)}
     ${({ columns }) => breakpointWrapper('grid-template-columns', columns, columnBuilder)}
     ${({ rows }) => breakpointWrapper('grid-template-rows', rows, rowBuilder)}
-    ${({ autoColWidth }) => breakpointWrapper('grid-auto-columns', px(autoColWidth))}
-    ${({ autoRowHeight }) => breakpointWrapper('grid-auto-rows', px(autoRowHeight))}
+    ${({ autoColWidth }) => breakpointWrapper('grid-auto-columns', autoColWidth, px)}
+    ${({ autoRowHeight }) => breakpointWrapper('grid-auto-rows', autoRowHeight, px)}
     ${({ areas }) => breakpointWrapper('grid-template-areas', areas, areaBuilder)}
-    ${({ gap }) => breakpointWrapper("grid-gap", px(gap))}
-    ${({ colGap }) => breakpointWrapper("column-gap", px(colGap))}
-    ${({ rowGap }) => breakpointWrapper("row-gap", px(rowGap))}
+    ${({ gap }) => breakpointWrapper("grid-gap", gap, px)}
+    ${({ colGap }) => breakpointWrapper("column-gap", colGap, px)}
+    ${({ rowGap }) => breakpointWrapper("row-gap", rowGap, px)}
     ${({ align }) => breakpointWrapper("align-content", align)}
     ${({ justify }) => breakpointWrapper("justify-content", justify)}
     ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
     ${({ justifyItems }) => breakpointWrapper("justify-items", justifyItems)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ width }) => breakpointWrapper('width', width, px)}
+    ${({ height }) => breakpointWrapper('height', height, px) + breakpointWrapper('line-height', height, px)}
     ${({ show, inline }) => breakpointWrapper('display', show != null && (show ? inline ? 'inline-grid' : 'grid' : 'none'))}
 `;
 GridContainer.propTypes = gridPropTypes;
@@ -393,8 +393,8 @@ export const GridItemContainer = styled.div`
     ${({ rowEnd }) => breakpointWrapper("grid-row-end", Math.abs(rowEnd))}
     ${({ align }) => breakpointWrapper("align-self", align)}
     ${({ justify }) => breakpointWrapper("justify-self", justify)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ width }) => breakpointWrapper('width', width, px)}
+    ${({ height }) => breakpointWrapper('height', height, px) + breakpointWrapper('line-height', height, px)}
     ${({ show }) => breakpointWrapper('display', show != null && (show ? 'block' : 'none'))}
 `;
 GridItemContainer.propTypes = gridItemPropTypes;

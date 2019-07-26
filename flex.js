@@ -247,8 +247,8 @@ const FlexContainer = styled.div`
     ${({ align }) => breakpointWrapper('align-content', align)}
     ${({ justify }) => breakpointWrapper('justify-content', justify)}
     ${({ alignItems }) => breakpointWrapper('align-items', alignItems)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ width }) => breakpointWrapper('width', width, px)}
+    ${({ height }) => breakpointWrapper('height', height, px) + breakpointWrapper('line-height', height, px)}
     ${({ show, inline }) => breakpointWrapper('display', show != null && (show ? inline ? 'inline-flex' : 'flex' : 'none'))}
 `;
 FlexContainer.propTypes = flexPropTypes;
@@ -257,10 +257,10 @@ const FlexItemContainer = styled.div`
     ${({ flex }) => breakpointWrapper('flex', flex, flexBuilder)}
     ${({ grow }) => breakpointWrapper('flex-grow', grow)}
     ${({ shrink }) => breakpointWrapper('flex-shrink', shrink)}
-    ${({ basis }) => breakpointWrapper('flex-basis', px(basis))}
+    ${({ basis }) => breakpointWrapper('flex-basis', basis, px)}
     ${({ align }) => breakpointWrapper('align-self', align)}
-    ${({ width }) => breakpointWrapper('width', px(width))}
-    ${({ height }) => breakpointWrapper('height', px(height)) + breakpointWrapper('line-height', px(height))}
+    ${({ width }) => breakpointWrapper('width', width, px)}
+    ${({ height }) => breakpointWrapper('height', height, px) + breakpointWrapper('line-height', height, px)}
     ${({ show }) => breakpointWrapper('display', show != null && (show ? 'block' : 'none'))}
 `;
 FlexItemContainer.propTypes = flexItemPropTypes;

@@ -1,22 +1,13 @@
 export const breakpoints = {
-    sm: "576px",
-    md: "768px",
-    lg: "992px",
-    xl: "1199px"
+    sm: 576,
+    md: 768,
+    lg: 992,
+    xl: 1199
 };
 
 export const px = value => {
     if (value) {
-        if (value.xs || value.sm || value.md || value.lg || value.xl) {
-            const output = { ...value };
-            if (output.xs) output.xs = px(output.xs);
-            if (output.sm) output.sm = px(output.sm);
-            if (output.md) output.md = px(output.md);
-            if (output.lg) output.lg = px(output.lg);
-            if (output.xl) output.xl = px(output.xl);
-            return output;
-        }
-        return typeof value === "number" ? value + "px" : value && value.length > 0 ? value : null;
+        return typeof value === "number" ? value + "px" : value.length > 0 ? value : null;
     }
 };
 
@@ -26,19 +17,20 @@ export const breakpointWrapper = (name, value, func) => {
     if (!value) return null;
     let output = "";
     if (value.xs || value.sm || value.md || value.lg || value.xl) {
-        if (value.xs && !(func && !func.call(null, value.xs))) output += `${name}: ${func ? func.call(null, value.xs) : value.xs};`;
+        if (value.xs && !(func && !func.call(null, value.xs))) {
+            output += `${name}: ${func ? func.call(null, value.xs) : value.xs};`;
+        }
         output += Object.keys(breakpoints)
             .map(
                 bp =>
                     value[bp] &&
                     !(func && !func.call(null, value[bp])) &&
-                    `@media (min-width: ${breakpoints[bp]}) {
+                    `@media (min-width: ${breakpoints[bp]}px) {
                         ${name}: ${func ? func.call(null, value[bp]) : value[bp]};
                     }`
             )
             .join("\n");
-    }
-    else {
+    } else {
         if (func && !func.call(null, value)) return null;
         output += `${name}: ${func ? func.call(null, value) : value};`;
     }
