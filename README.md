@@ -1,5 +1,6 @@
 # react-styled-flexgrid
-![Size](https://img.shields.io/github/license/sillvva/react-styled-flexgrid.svg)
+![Size](https://img.shields.io/github/repo-size/sillvva/react-styled-flexgrid)
+![License](https://img.shields.io/github/license/sillvva/react-styled-flexgrid.svg)
 ![Version](https://img.shields.io/github/tag/sillvva/react-styled-flexgrid.svg)
 ![LastCommit](https://img.shields.io/github/last-commit/sillvva/react-styled-flexgrid.svg)
 
@@ -28,13 +29,13 @@ A Package for CSS Grid and Flexbox React Components
 
 **react-styled-grid** allows you to specify different configurations for your grid and flexbox components for different screen sizes. The breakpoints used are as follows:
 
-| Breakpoint | <div style="text-align: right">Screen Width</div> |
-|------------|---------------------------------------------------|
-| xs         | <div style="text-align: right">0px +</div>        |
-| sm         | <div style="text-align: right">576px +</div>      |
-| md         | <div style="text-align: right">768px +</div>      |
-| lg         | <div style="text-align: right">992px +</div>      |
-| xl         | <div style="text-align: right">1199px +</div>     |
+| Breakpoint | Screen Width |
+|------------|--------------|
+| xs         | >= 0px +     |
+| sm         | >= 576px +   |
+| md         | >= 768px +   |
+| lg         | >= 992px +   |
+| xl         | >= 1199px +  |
 
 #### Using Breakpoints
 
