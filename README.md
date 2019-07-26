@@ -31,11 +31,11 @@ A Package for CSS Grid and Flexbox React Components
 
 | Breakpoint | Screen Width |
 |------------|--------------|
-| xs         | >= 0px +     |
-| sm         | >= 576px +   |
-| md         | >= 768px +   |
-| lg         | >= 992px +   |
-| xl         | >= 1199px +  |
+| xs         | >= 0px       |
+| sm         | >= 576px     |
+| md         | >= 768px     |
+| lg         | >= 992px     |
+| xl         | >= 1199px    |
 
 #### Using Breakpoints
 
