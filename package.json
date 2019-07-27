@@ -1,6 +1,6 @@
 {
   "name": "@sillvva/react-styled-flexgrid",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Package for CSS Grid and Flexbox React Components",
   "dependencies": {
     "prop-types": "^15.7.2",
