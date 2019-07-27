@@ -273,28 +273,17 @@ const FlexItemContainer = styled.div`
     ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
 `;
 FlexItemContainer.propTypes = flexItemPropTypes;
-class FlexItem extends React.Component {
-    render() {
-        return (
-            <FlexItemContainer {...this.props}>
-                {React.Children.map(this.props.children, child => {
-                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
-                })}
-            </FlexItemContainer>
-        );
-    }
-}
 export class Flex extends React.Component {
     static get Item() {
-        return FlexItem;
+        return (props) => {
+            return React.createElement(FlexItemContainer, props, React.Children.map(props.children, child => {
+                return child.type ? React.cloneElement(child, props.itemProps) : child;
+            }));
+        };
     }
     render() {
-        return (
-            <FlexContainer {...this.props}>
-                {React.Children.map(this.props.children, child => {
-                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
-                })}
-            </FlexContainer>
-        );
+        return React.createElement(FlexContainer, this.props, React.Children.map(this.props.children, child => {
+            return child.type ? React.cloneElement(child, this.props.itemProps) : child;
+        }));
     }
 }

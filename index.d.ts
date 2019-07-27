@@ -61,7 +61,7 @@ export namespace ReactGridComponent {
 
 export class Grid extends React.Component<ReactGridComponent.GridProps, any> {
     static Row: React.FunctionComponent<ReactGridComponent.GridRowProps>;
-    static Item: React.Component<ReactGridComponent.GridItemProps, any>;
+    static Item: React.FunctionComponent<ReactGridComponent.GridItemProps>;
 }
 
 export namespace ReactFlexComponent {
@@ -104,5 +104,5 @@ export namespace ReactFlexComponent {
 }
 
 export class Flex extends React.Component<ReactFlexComponent.FlexProps, any> {
-    static Item: React.Component<ReactFlexComponent.FlexItemProps, any>;
+    static Item: React.FunctionComponent<ReactFlexComponent.FlexItemProps>;
 }

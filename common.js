@@ -61,7 +61,7 @@ export const breakpointWrapper = (name, value, func, ...additionalArgs) => {
             })
             .join("\n")
             .trim();
-    } else if (value || (func && additionalArgs.length > 0)) {
+    } else {
         if (func && !func(...[value, ...additionalArgs.filter(a => typeof a !== "object")])) return null;
         output += `${name}: ${func ? func(...[value, ...additionalArgs.filter(a => typeof a !== "object")]) : value};`;
     }

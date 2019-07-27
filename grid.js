@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { breakpointWrapper, px, fr } from "./common";
+import { breakpointWrapper, px, fr } from "@sillvva/react-styled-flexgrid/common";
 const showContainerBuilder = (inline, show) => (show == null || show === true ? (inline ? "inline-grid" : "grid") : "none");
 const showItemBuilder = show => (show == null || show === true ? "block" : "none");
 const columnBuilder = columns => {
@@ -377,7 +377,6 @@ export const GridContainer = styled.div`
     ${({ show, inline }) => breakpointWrapper("display", show, showContainerBuilder.bind(this, inline))}
 `;
 GridContainer.propTypes = gridPropTypes;
-export const GridRow = props => <React.Fragment>{props.children}</React.Fragment>;
 export const GridItemContainer = styled.div`
     ${({ area }) => breakpointWrapper("grid-area", area)} 
     ${({ column }) => breakpointWrapper("grid-column", column)} 
@@ -394,31 +393,20 @@ export const GridItemContainer = styled.div`
     ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
 `;
 GridItemContainer.propTypes = gridItemPropTypes;
-class GridItem extends React.Component {
-    render() {
-        return (
-            <GridItemContainer {...this.props}>
-                {React.Children.map(this.props.children, child => {
-                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
-                })}
-            </GridItemContainer>
-        );
-    }
-}
 export class Grid extends React.Component {
     static get Row() {
-        return GridRow;
+        return props => React.createElement(React.Fragment, props, props.children);
     }
     static get Item() {
-        return GridItem;
+        return props => {
+            return React.createElement(GridItemContainer, props, React.Children.map(props.children, child => {
+                return child.type ? React.cloneElement(child, props.itemProps) : child;
+            }));
+        };
     }
     render() {
-        return (
-            <GridContainer {...this.props}>
-                {React.Children.map(this.props.children, child => {
-                    return child.type ? React.cloneElement(child, this.props.itemProps) : child;
-                })}
-            </GridContainer>
-        );
+        return React.createElement(GridContainer, this.props, React.Children.map(this.props.children, child => {
+            return child.type ? React.cloneElement(child, this.props.itemProps) : child;
+        }));
     }
 }
