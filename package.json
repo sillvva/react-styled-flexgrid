@@ -21,5 +21,17 @@
   "bugs": {
     "url": "https://github.com/sillvva/react-styled-flexgrid/issues"
   },
-  "homepage": "https://github.com/sillvva/react-styled-flexgrid#readme"
+  "homepage": "https://github.com/sillvva/react-styled-flexgrid#readme",
+  "keywords": [
+    "browser",
+    "react",
+    "react-component",
+    "layout",
+    "css",
+    "grid",
+    "flexbox",
+    "flexboxgrid",
+    "styled-components",
+    "typescript"
+  ]
 }
