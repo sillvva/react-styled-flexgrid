@@ -2,7 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { breakpointWrapper, px, fr } from "./common";
-const columnBuilder = (columns) => {
+const showContainerBuilder = (inline, show) => (show == null || show === true ? (inline ? "inline-grid" : "grid") : "none");
+const showItemBuilder = show => (show == null || show === true ? "block" : "none");
+const columnBuilder = columns => {
     if (columns) {
         if (columns instanceof Array) {
             return columns
@@ -10,15 +12,13 @@ const columnBuilder = (columns) => {
                     return px(width);
                 })
                 .join(" ");
-        }
-        else if (columns instanceof Object) {
+        } else if (columns instanceof Object) {
             return `repeat(auto-fit,minmax(${px(columns.min)},1fr));`;
-        }
-        else return fr(columns);
+        } else return fr(columns);
     }
     return null;
 };
-const rowBuilder = (rows) => {
+const rowBuilder = rows => {
     if (rows) {
         if (rows instanceof Array) {
             return rows
@@ -26,14 +26,13 @@ const rowBuilder = (rows) => {
                     return px(width);
                 })
                 .join(" ");
-        }
-        else {
+        } else {
             return fr(rows);
         }
     }
     return null;
 };
-const areaBuilder = (areas) => {
+const areaBuilder = areas => {
     if (areas) {
         const maxColumns = areas.reduce((prev, cur) => {
             return Math.max(prev, cur.length);
@@ -41,13 +40,13 @@ const areaBuilder = (areas) => {
         return areas
             .map(row => {
                 const lastColumn = row.slice(-1)[0];
-                return [ ...row, ...Array(maxColumns - row.length).fill(lastColumn) ].join(" ");
+                return [...row, ...Array(maxColumns - row.length).fill(lastColumn)].join(" ");
             })
             .join('" "');
     }
     return null;
 };
-const ptGridWidth = PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]);
+const ptGridWidth = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 const ptColumns = PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
@@ -56,16 +55,12 @@ const ptColumns = PropTypes.oneOfType([
         min: ptGridWidth
     })
 ]);
-const ptRows = PropTypes.oneOfType([ 
-    PropTypes.string, 
-    PropTypes.number, 
-    PropTypes.arrayOf(ptGridWidth) 
-]);
+const ptRows = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.arrayOf(ptGridWidth)]);
 const ptAreas = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string));
-const ptFlow = PropTypes.oneOf([ "row", "column", "dense", "row dense", "column dense" ]);
-const ptAlign = PropTypes.oneOf([ "center", "start", "end", "stretch", "space-around", "space-between", "space-evenly", "inherit", "initial", "unset" ]);
-const ptAlignItems = PropTypes.oneOf([ "center", "start", "end", "stretch", "inherit", "initial", "unset" ]);
-const ptJustifyItems = PropTypes.oneOf([ "center", "start", "end", "stretch", "inherit", "initial", "unset" ]);
+const ptFlow = PropTypes.oneOf(["row", "column", "dense", "row dense", "column dense"]);
+const ptAlign = PropTypes.oneOf(["center", "start", "end", "stretch", "space-around", "space-between", "space-evenly", "inherit", "initial", "unset"]);
+const ptAlignItems = PropTypes.oneOf(["center", "start", "end", "stretch", "inherit", "initial", "unset"]);
+const ptJustifyItems = PropTypes.oneOf(["center", "start", "end", "stretch", "inherit", "initial", "unset"]);
 const gridItemPropTypes = {
     area: PropTypes.oneOfType([
         PropTypes.string,
@@ -363,13 +358,12 @@ const gridPropTypes = {
     itemProps: PropTypes.object
 };
 export const GridContainer = styled.div`
-    ${({ inline }) => breakpointWrapper('display', inline ? 'inline-grid' : 'grid')}
     ${({ flow }) => breakpointWrapper("grid-auto-flow", flow)}
-    ${({ columns }) => breakpointWrapper('grid-template-columns', columns, columnBuilder)}
-    ${({ rows }) => breakpointWrapper('grid-template-rows', rows, rowBuilder)}
-    ${({ autoColWidth }) => breakpointWrapper('grid-auto-columns', autoColWidth, px)}
-    ${({ autoRowHeight }) => breakpointWrapper('grid-auto-rows', autoRowHeight, px)}
-    ${({ areas }) => breakpointWrapper('grid-template-areas', areas, areaBuilder)}
+    ${({ columns }) => breakpointWrapper("grid-template-columns", columns, columnBuilder)}
+    ${({ rows }) => breakpointWrapper("grid-template-rows", rows, rowBuilder)}
+    ${({ autoColWidth }) => breakpointWrapper("grid-auto-columns", autoColWidth, px)}
+    ${({ autoRowHeight }) => breakpointWrapper("grid-auto-rows", autoRowHeight, px)}
+    ${({ areas }) => breakpointWrapper("grid-template-areas", areas, areaBuilder)}
     ${({ gap }) => breakpointWrapper("grid-gap", gap, px)}
     ${({ colGap }) => breakpointWrapper("column-gap", colGap, px)}
     ${({ rowGap }) => breakpointWrapper("row-gap", rowGap, px)}
@@ -377,10 +371,10 @@ export const GridContainer = styled.div`
     ${({ justify }) => breakpointWrapper("justify-content", justify)}
     ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
     ${({ justifyItems }) => breakpointWrapper("justify-items", justifyItems)}
-    ${({ width }) => breakpointWrapper('width', width, px)}
-    ${({ height }) => breakpointWrapper('height', height, px)}
-    ${({ height }) => breakpointWrapper('line-height', height, px)}
-    ${({ show, inline }) => breakpointWrapper('display', show != null && (show ? inline ? 'inline-grid' : 'grid' : 'none'))}
+    ${({ width }) => breakpointWrapper("width", width, px)}
+    ${({ height }) => breakpointWrapper("height", height, px)}
+    ${({ height }) => breakpointWrapper("line-height", height, px)}
+    ${({ show, inline }) => breakpointWrapper("display", show, showContainerBuilder.bind(this, inline))}
 `;
 GridContainer.propTypes = gridPropTypes;
 export const GridRow = props => <React.Fragment>{props.children}</React.Fragment>;
@@ -394,10 +388,10 @@ export const GridItemContainer = styled.div`
     ${({ rowEnd }) => breakpointWrapper("grid-row-end", rowEnd, Math.abs)}
     ${({ align }) => breakpointWrapper("align-self", align)}
     ${({ justify }) => breakpointWrapper("justify-self", justify)}
-    ${({ width }) => breakpointWrapper('width', width, px)}
-    ${({ height }) => breakpointWrapper('height', height, px)}
-    ${({ height }) => breakpointWrapper('line-height', height, px)}
-    ${({ show }) => breakpointWrapper('display', show != null && (show ? 'block' : 'none'))}
+    ${({ width }) => breakpointWrapper("width", width, px)}
+    ${({ height }) => breakpointWrapper("height", height, px)}
+    ${({ height }) => breakpointWrapper("line-height", height, px)}
+    ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
 `;
 GridItemContainer.propTypes = gridItemPropTypes;
 class GridItem extends React.Component {

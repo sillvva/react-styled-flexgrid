@@ -21,7 +21,7 @@ A Package for CSS Grid and Flexbox React Components
 3. [Flexbox](#flexbox)
    * [The Flex Component](#the-flex-component)
    * [The Flex.Item Component](#the-flexitem-component)
-4. [Change Log](#change-log)
+4. [Change Log](https://github.com/sillvva/react-styled-flexgrid/releases)
 
 ---
 
@@ -211,10 +211,15 @@ const Navbar = (props) => {
     return (
         <Flex as="header" height={navbarHeight} alignItems="center" className="navbar">
             <Flex.Item width={100}>Logo</Flex.Item>
-            <Flex.Item 
-                as="nav" 
-                flex={{ min: "auto", grow: 1 }} 
-                itemProps={{ alignItems: "center", height: navbarHeight, inline: true }}>
+            <Flex.Item
+                as="nav"
+                flex={{ min: "auto", grow: 1 }}
+                itemProps={{
+                    alignItems: "center",
+                    height: navbarHeight,
+                    inline: true,
+                    show: { xs: false, md: true }
+                }}>
                 <Flex as="a" href="/services">
                     Services
                 </Flex>
@@ -222,9 +227,14 @@ const Navbar = (props) => {
                     Services
                 </Flex>
             </Flex.Item>
-            <Flex.Item>
-                <Flex as="a" href="/account" alignItems="center" height={navbarHeight}>
+            <Flex.Item itemProps={{ alignItems: "center", height: navbarHeight }}>
+                <Flex as="a" href="/account" show={{ xs: false, md: true }}>
                     Account
+                </Flex>
+                <Flex as="span" show={{ xs: true, md: false }}>
+                    <svg width="1em" height="1em" viewBox="0 0 20 20">
+                        <path d="M20 5V2H0v3h20zm0 6V8H0v3h20zm0 6v-3H0v3h20z" fill="currentColor" />
+                    </svg>
                 </Flex>
             </Flex.Item>
         </Flex>
@@ -326,10 +336,3 @@ This is the flexbox container component.
 * `height` - (Type: `Integer | String`) The height of the flex item in CSS units
 * `show` - (Type: `Boolean`) controls whether the flex item is present
 * `itemProps` - defines a global set of props for the immediate children of this component.
-
-# Change Log
-
-| Date       | Version | Description |
-|------------|---------|-------------|
-| 07-23-2019 | 1.0.0   | Initial commit.<br>Includes CSS Grid support. |
-| 07-25-2019 | 1.1.0   | Flexbox added.<br>Breakpoint support added.<br>`show`, `inline`, and `itemProps` props added.<br>Documentation added. |

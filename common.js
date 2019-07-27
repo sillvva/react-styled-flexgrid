@@ -13,26 +13,56 @@ export const px = value => {
 
 export const fr = n => (typeof n === "number" ? `repeat(${n}, 1fr)` : n);
 
-export const breakpointWrapper = (name, value, func) => {
-    if (!value) return null;
+export const breakpointWrapper = (name, value, func, ...additionalArgs) => {
+    if (value == null && name !== "display") return null;
     let output = "";
-    if (value.xs || value.sm || value.md || value.lg || value.xl) {
-        if (value.xs && !(func && !func.call(null, value.xs))) {
-            output += `${name}: ${func ? func.call(null, value.xs) : value.xs};`;
+    if (additionalArgs.length > 0) {
+        const keys = [];
+        [value, ...additionalArgs].forEach(
+            v =>
+                v &&
+                Object.keys(v).forEach(k => {
+                    if (!keys.find(key => key === k)) keys.push(k);
+                })
+        );
+        if (keys.length > 0) {
+            if (typeof value !== "object") {
+                const v = value == null ? null : value;
+                value = {};
+                keys.forEach(k => {
+                    value[k] = v;
+                });
+            }
+            additionalArgs = additionalArgs.map(aa => {
+                if (typeof aa !== "object") {
+                    const v = aa;
+                    aa = {};
+                    keys.forEach(k => {
+                        aa[k] = v;
+                    });
+                }
+                return aa;
+            });
+        } else {
+            if (name === "display" && value == null) {
+                value = true;
+            }
         }
+    }
+    if (value && (value.xs !== undefined || value.sm !== undefined || value.md !== undefined || value.lg !== undefined || value.xl !== undefined)) {
         output += Object.keys(breakpoints)
-            .map(
-                bp =>
-                    value[bp] &&
-                    !(func && !func.call(null, value[bp])) &&
-                    `@media (min-width: ${breakpoints[bp]}px) {
-                        ${name}: ${func ? func.call(null, value[bp]) : value[bp]};
-                    }`
-            )
-            .join("\n");
-    } else {
-        if (func && !func.call(null, value)) return null;
-        output += `${name}: ${func ? func.call(null, value) : value};`;
+            .map(bp => {
+                return value[bp] !== undefined && !(func && func(...[value[bp], ...additionalArgs.filter(a => a[bp])]) == null)
+                    ? `${bp !== "xs" ? `@media (min-width: ${breakpoints[bp]}px) {` : ""}
+                        ${name}: ${func ? func(...[value[bp], ...additionalArgs.map(a => a[bp])]) : value[bp]};
+                        ${bp !== "xs" ? `}` : ""}`
+                    : "";
+            })
+            .join("\n")
+            .trim();
+    } else if (value || (func && additionalArgs.length > 0)) {
+        if (func && !func(...[value, ...additionalArgs.filter(a => typeof a !== "object")])) return null;
+        output += `${name}: ${func ? func(...[value, ...additionalArgs.filter(a => typeof a !== "object")]) : value};`;
     }
     return output;
 };
