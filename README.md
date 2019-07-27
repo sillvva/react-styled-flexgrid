@@ -28,7 +28,13 @@ A Package for CSS Grid and Flexbox React Components
 
 ## Importing the Components
 
-You can import the components like so:
+First install the package:
+
+```
+npm install --save @sillvva/react-styled-flexgrid
+```
+
+Then you can import the components like so:
 
 ```javascript
 import { Grid, Flex } from "@sillvva/react-styled-flexgrid";
