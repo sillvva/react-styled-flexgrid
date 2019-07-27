@@ -13,17 +13,26 @@ A Package for CSS Grid and Flexbox React Components
 
 ## Table of Contents
 
-1. [Breakpoints](#breakpoints)
-2. [CSS Grid](#css-grid)
+1. [Importing the Components](#importing-the-components)
+2. [Breakpoints](#breakpoints)
+3. [CSS Grid](#css-grid)
    * [The Grid Component](#the-grid-component)
    * [The Grid.Row Component](#the-gridrow-component)
    * [The Grid.Item Component](#the-griditem-component)
-3. [Flexbox](#flexbox)
+4. [Flexbox](#flexbox)
    * [The Flex Component](#the-flex-component)
    * [The Flex.Item Component](#the-flexitem-component)
-4. [Change Log](https://github.com/sillvva/react-styled-flexgrid/releases)
+5. [Change Log](https://github.com/sillvva/react-styled-flexgrid/releases)
 
 ---
+
+## Importing the Components
+
+You can import the components like so:
+
+```javascript
+import { Grid, Flex } from "@sillvva/react-styled-flexgrid";
+```
 
 ## Breakpoints
 
