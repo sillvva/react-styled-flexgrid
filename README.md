@@ -1,8 +1,12 @@
 # react-styled-flexgrid
 ![Size](https://img.shields.io/github/repo-size/sillvva/react-styled-flexgrid)
 ![License](https://img.shields.io/github/license/sillvva/react-styled-flexgrid.svg)
-![Version](https://img.shields.io/github/tag/sillvva/react-styled-flexgrid.svg)
+![Version](https://img.shields.io/github/package-json/v/sillvva/react-styled-flexgrid)
 ![LastCommit](https://img.shields.io/github/last-commit/sillvva/react-styled-flexgrid.svg)
+
+![react](https://img.shields.io/npm/dependency-version/@sillvva/react-styled-flexgrid/react)
+![prop-types](https://img.shields.io/npm/dependency-version/@sillvva/react-styled-flexgrid/prop-types)
+![styled-components](https://img.shields.io/npm/dependency-version/@sillvva/react-styled-flexgrid/styled-components)
 
 
 A Package for CSS Grid and Flexbox React Components
@@ -42,7 +46,7 @@ import { Grid, Flex } from "@sillvva/react-styled-flexgrid";
 
 ## Breakpoints
 
-**react-styled-grid** allows you to specify different configurations for your grid and flexbox components for different screen sizes. The breakpoints used are as follows:
+**react-styled-flexgrid** allows you to specify different configurations for your grid and flexbox components for different screen sizes. The breakpoints used are as follows:
 
 | Breakpoint | Screen Width |
 |------------|--------------|
