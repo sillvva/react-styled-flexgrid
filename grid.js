@@ -46,16 +46,9 @@ const areaBuilder = areas => {
     }
     return null;
 };
-const ptGridWidth = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-const ptColumns = PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(ptGridWidth),
-    PropTypes.shape({
-        min: ptGridWidth
-    })
-]);
-const ptRows = PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.arrayOf(ptGridWidth)]);
+const ptGridWidth = PropTypes.oneOfType([ PropTypes.string, PropTypes.number ]);
+const ptColumns = PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(ptGridWidth), PropTypes.shape({ min: ptGridWidth }) ]);
+const ptRows = PropTypes.oneOfType([ PropTypes.string, PropTypes.number, PropTypes.arrayOf(ptGridWidth) ]);
 const ptAreas = PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string));
 const ptFlow = PropTypes.oneOf(["row", "column", "dense", "row dense", "column dense"]);
 const ptAlign = PropTypes.oneOf(["center", "start", "end", "stretch", "space-around", "space-between", "space-evenly", "inherit", "initial", "unset"]);
