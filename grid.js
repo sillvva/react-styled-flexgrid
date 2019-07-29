@@ -386,7 +386,7 @@ export const GridItemContainer = styled.div`
     ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
 `;
 GridItemContainer.propTypes = gridItemPropTypes;
-export class Grid extends React.Component {
+export default class Grid extends React.Component {
     static get Row() {
         return props => React.createElement(React.Fragment, props, props.children);
     }

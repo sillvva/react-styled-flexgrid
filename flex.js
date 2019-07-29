@@ -273,7 +273,7 @@ const FlexItemContainer = styled.div`
     ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
 `;
 FlexItemContainer.propTypes = flexItemPropTypes;
-export class Flex extends React.Component {
+export default class Flex extends React.Component {
     static get Item() {
         return (props) => {
             return React.createElement(FlexItemContainer, props, React.Children.map(props.children, child => {
