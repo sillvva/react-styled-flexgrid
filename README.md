@@ -58,7 +58,7 @@ import { Grid, Flex } from "@sillvva/react-styled-flexgrid";
 
 #### Using Breakpoints
 
-For each of the props of the `Flex` and `Flex.Item` components, you can define a different value for each breakpoint. Each breakpoint defines the properties for the screen width listed or higher. If you define a higher break point, it's values will take precedent. If you define the `xs` breakpoint, but no others, then it wil be treated the same as having no breakpoints.
+For each of the props of the `Grid`, `Grid.Item`, `Flex` and `Flex.Item` components, you can define a different value for each breakpoint. Each breakpoint defines the properties for the screen width listed or higher. If you define a higher break point, it's values will take precedent. If you define the `xs` breakpoint, but no others, then it wil be treated the same as having no breakpoints.
 
 For example: 
 
