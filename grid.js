@@ -351,6 +351,7 @@ const gridPropTypes = {
     itemProps: PropTypes.object
 };
 export const GridContainer = styled.div`
+    box-sizing: border-box;
     ${({ flow }) => breakpointWrapper("grid-auto-flow", flow)}
     ${({ columns }) => breakpointWrapper("grid-template-columns", columns, columnBuilder)}
     ${({ rows }) => breakpointWrapper("grid-template-rows", rows, rowBuilder)}
@@ -371,6 +372,7 @@ export const GridContainer = styled.div`
 `;
 GridContainer.propTypes = gridPropTypes;
 export const GridItemContainer = styled.div`
+    box-sizing: border-box;
     ${({ area }) => breakpointWrapper("grid-area", area)} 
     ${({ column }) => breakpointWrapper("grid-column", column)} 
     ${({ columnStart }) => breakpointWrapper("grid-column-start", columnStart, Math.abs)} 

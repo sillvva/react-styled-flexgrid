@@ -249,6 +249,7 @@ const flexPropTypes = {
     itemProps: PropTypes.object
 };
 const FlexContainer = styled.div`
+    box-sizing: border-box;
     ${({ dir }) => breakpointWrapper("flex-dir", dir)}
     ${({ wrap }) => breakpointWrapper("flex-wrap", wrap)}
     ${({ align }) => breakpointWrapper("align-content", align)}
@@ -261,6 +262,7 @@ const FlexContainer = styled.div`
 `;
 FlexContainer.propTypes = flexPropTypes;
 const FlexItemContainer = styled.div`
+    box-sizing: border-box;
     ${({ order }) => breakpointWrapper("order", order)}
     ${({ flex }) => breakpointWrapper("flex", flex, flexBuilder)}
     ${({ grow }) => breakpointWrapper("flex-grow", grow)}
