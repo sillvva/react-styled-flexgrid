@@ -16,6 +16,7 @@ export namespace ReactGridComponent {
     interface GridItemProps {
         children?: React.ReactNode;
         className?: string;
+        as?: React.ReactType;
         area?: string | { xs?: string, sm?: string, md?: string, lg?: string, xl?: string };
         column?: string | { xs?: string, sm?: string, md?: string, lg?: string, xl?: string };
         columnStart?: number | string | { xs?: number | string, sm?: number | string, md?: number | string, lg?: number | string, xl?: number | string };
@@ -34,6 +35,7 @@ export namespace ReactGridComponent {
     interface GridProps {
         children?: React.ReactNode;
         className?: string;
+        as?: React.ReactType;
         inline?: boolean | { xs?: boolean, sm?: boolean, md?: boolean, lg?: boolean, xl?: boolean };
         columns?: Columns | { xs?: Columns, sm?: Columns, md?: Columns, lg?: Columns, xl?: Columns };
         rows?: Rows | { xs?: Rows, sm?: Rows, md?: Rows, lg?: Rows, xl?: Rows };
@@ -76,6 +78,7 @@ export namespace ReactFlexComponent {
     interface FlexItemProps {
         children?: React.ReactNode;
         className?: string;
+        as?: React.ReactType;
         flex?: FlexSpace | { xs?: FlexSpace, sm?: FlexSpace, md?: FlexSpace, lg?: FlexSpace, xl?: FlexSpace };
         grow?: number | { xs?: number, sm?: number, md?: number, lg?: number, xl?: number };
         shrink?: number | { xs?: number, sm?: number, md?: number, lg?: number, xl?: number };
@@ -90,6 +93,7 @@ export namespace ReactFlexComponent {
     interface FlexProps {
         children?: React.ReactNode;
         className?: string;
+        as?: React.ReactType;
         inline?: boolean | { xs?: boolean, sm?: boolean, md?: boolean, lg?: boolean, xl?: boolean };
         dir?: FlexDirection | { xs?: FlexDirection, sm?: FlexDirection, md?: FlexDirection, lg?: FlexDirection, xl?: FlexDirection };
         wrap?: FlexWrap | { xs?: FlexWrap, sm?: FlexWrap, md?: FlexWrap, lg?: FlexWrap, xl?: FlexWrap };

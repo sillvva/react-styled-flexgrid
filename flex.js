@@ -153,7 +153,8 @@ const flexItemPropTypes = {
             xl: PropTypes.bool
         })
     ]),
-    itemProps: PropTypes.object
+    itemProps: PropTypes.object,
+    as: PropTypes.string
 };
 const flexPropTypes = {
     inline: PropTypes.oneOfType([
@@ -246,44 +247,45 @@ const flexPropTypes = {
             xl: PropTypes.bool
         })
     ]),
-    itemProps: PropTypes.object
+    itemProps: PropTypes.object,
+    as: PropTypes.string
 };
-const FlexContainer = styled.div`
-    box-sizing: border-box;
-    ${({ dir }) => breakpointWrapper("flex-dir", dir)}
-    ${({ wrap }) => breakpointWrapper("flex-wrap", wrap)}
-    ${({ align }) => breakpointWrapper("align-content", align)}
-    ${({ justify }) => breakpointWrapper("justify-content", justify)}
-    ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
-    ${({ width }) => breakpointWrapper("width", width, px)}
-    ${({ height }) => breakpointWrapper("height", height, px)}
-    ${({ height }) => breakpointWrapper("line-height", height, px)}
-    ${({ show, inline }) => breakpointWrapper("display", show, showContainerBuilder, inline)}
-`;
-FlexContainer.propTypes = flexPropTypes;
-const FlexItemContainer = styled.div`
-    box-sizing: border-box;
-    ${({ order }) => breakpointWrapper("order", order)}
-    ${({ flex }) => breakpointWrapper("flex", flex, flexBuilder)}
-    ${({ grow }) => breakpointWrapper("flex-grow", grow)}
-    ${({ shrink }) => breakpointWrapper("flex-shrink", shrink)}
-    ${({ basis }) => breakpointWrapper("flex-basis", basis, px)}
-    ${({ align }) => breakpointWrapper("align-self", align)}
-    ${({ width }) => breakpointWrapper("width", width, px)}
-    ${({ height }) => breakpointWrapper("height", height, px)}
-    ${({ height }) => breakpointWrapper("line-height", height, px)}
-    ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
-`;
-FlexItemContainer.propTypes = flexItemPropTypes;
 export default class Flex extends React.Component {
     static get Item() {
         return (props) => {
+            const FlexItemContainer = styled(props.as ? props.as : 'div')`
+                box-sizing: border-box;
+                ${({ order }) => breakpointWrapper("order", order)}
+                ${({ flex }) => breakpointWrapper("flex", flex, flexBuilder)}
+                ${({ grow }) => breakpointWrapper("flex-grow", grow)}
+                ${({ shrink }) => breakpointWrapper("flex-shrink", shrink)}
+                ${({ basis }) => breakpointWrapper("flex-basis", basis, px)}
+                ${({ align }) => breakpointWrapper("align-self", align)}
+                ${({ width }) => breakpointWrapper("width", width, px)}
+                ${({ height }) => breakpointWrapper("height", height, px)}
+                ${({ height }) => breakpointWrapper("line-height", height, px)}
+                ${({ show }) => breakpointWrapper("display", show, showItemBuilder)}
+            `;
+            FlexItemContainer.propTypes = flexItemPropTypes;
             return React.createElement(FlexItemContainer, props, React.Children.map(props.children, child => {
                 return child.type ? React.cloneElement(child, props.itemProps) : child;
             }));
         };
     }
     render() {
+        const FlexContainer = styled(this.props.as ? this.props.as : 'div')`
+            box-sizing: border-box;
+            ${({ dir }) => breakpointWrapper("flex-dir", dir)}
+            ${({ wrap }) => breakpointWrapper("flex-wrap", wrap)}
+            ${({ align }) => breakpointWrapper("align-content", align)}
+            ${({ justify }) => breakpointWrapper("justify-content", justify)}
+            ${({ alignItems }) => breakpointWrapper("align-items", alignItems)}
+            ${({ width }) => breakpointWrapper("width", width, px)}
+            ${({ height }) => breakpointWrapper("height", height, px)}
+            ${({ height }) => breakpointWrapper("line-height", height, px)}
+            ${({ show, inline }) => breakpointWrapper("display", show, showContainerBuilder, inline)}
+        `;
+        FlexContainer.propTypes = flexPropTypes;
         return React.createElement(FlexContainer, this.props, React.Children.map(this.props.children, child => {
             return child.type ? React.cloneElement(child, this.props.itemProps) : child;
         }));
