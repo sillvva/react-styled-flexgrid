@@ -381,7 +381,7 @@ export default class Grid extends React.Component {
         };
     }
     render() {
-        export const GridContainer = styled(this.props.as ? this.props.as : 'div')`
+        const GridContainer = styled(this.props.as ? this.props.as : 'div')`
             box-sizing: border-box;
             ${({ flow }) => breakpointWrapper("grid-auto-flow", flow)}
             ${({ columns }) => breakpointWrapper("grid-template-columns", columns, columnBuilder)}
